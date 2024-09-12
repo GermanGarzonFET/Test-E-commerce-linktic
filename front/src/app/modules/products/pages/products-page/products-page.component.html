@@ -1,0 +1,16 @@
+<div class="contentainer">
+  <div class="carrito">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="searchProducts()"
+      placeholder="Buscar productos por nombre"
+      class="custom-number-input"
+    />
+  </div>
+  <app-card-products [product]="dataProducts"></app-card-products>
+  <app-sidebar class="sidebar" [isOpen]="sidebarOpen"></app-sidebar>
+  <button (click)="toggleSidebarVisibility()" class="toggle-sidebar-button">
+    <mat-icon class="cart-icon" [ngClass]="{ 'closed-cart': sidebarOpen }">shopping_cart</mat-icon>
+  </button>
+</div>
