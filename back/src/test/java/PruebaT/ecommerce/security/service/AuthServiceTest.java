@@ -46,7 +46,6 @@ class AuthServiceTest {
 
     @Test
     void testLogin_Success() {
-        // Datos de prueba
         LoginRequest loginRequest = new LoginRequest("username", "password");
         User user = User.builder()
                 .username("username")

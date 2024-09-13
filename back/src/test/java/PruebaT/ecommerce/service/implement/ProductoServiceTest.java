@@ -85,7 +85,6 @@ class ProductoServiceTest {
 
     @Test
     void testFindByNombreContainingIgnoreCase() {
-        // Crear un producto de ejemplo
         final Productos productos1 = new Productos();
         productos1.setNombre("nombre");
         productos1.setDescripcion("descripcion");
@@ -93,13 +92,10 @@ class ProductoServiceTest {
         productos1.setStock(0);
         productos1.setPrecio(0.0);
 
-        // Crear una lista de productos que contenga el producto de ejemplo
         final List<Productos> productosList = Arrays.asList(productos1);
 
-        // Configurar el mock para que devuelva la lista de productos
         lenient().when(mockProductosRepository.findByNombreContainingIgnoreCase("Lapiz")).thenReturn(productosList);
 
-        // Crear un DTO de ejemplo
         final ProductosDTO productosDTO = new ProductosDTO();
         productosDTO.setId(0);
         productosDTO.setNombre("nombre");
@@ -108,13 +104,10 @@ class ProductoServiceTest {
         productosDTO.setStock(0);
         productosDTO.setPrecio(0.0);
 
-        // Configurar el mock del ModelMapper
         lenient().when(mockModelMapper.map(productos1, ProductosDTO.class)).thenReturn(productosDTO);
 
-        // Llamar al método bajo prueba
         final List<ProductosDTO> result = productoServiceUnderTest.findByNombreContainingIgnoreCase("Lapiz");
 
-        // Verificar el resultado
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("nombre", result.get(0).getNombre());
@@ -124,7 +117,6 @@ class ProductoServiceTest {
     void testFindByNombreContainingIgnoreCase_ProductosRepositoryReturnsAbsent() {
         when(mockProductosRepository.findByNombreContainingIgnoreCase("Lapiz")).thenReturn(Collections.emptyList());
 
-        // Verificar que se lanza la excepción RecursoNoEncontradoException
         assertThatThrownBy(() -> productoServiceUnderTest.findByNombreContainingIgnoreCase("Lapiz"))
                 .isInstanceOf(RecursoNoEncontradoException.class);
     }
